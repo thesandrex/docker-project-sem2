@@ -3,7 +3,7 @@ name: Docker Project Deploy
 on:
   push:
     branches:
-      - test
+      - main
 
 jobs:
   build_and_push_to_docker_hub:
