@@ -30,3 +30,6 @@ RUN chown -R appuser:appgroup /app
 USER appuser
 
 ENTRYPOINT ["./app"]
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -fIs http://localhost:8081/health | grep -q "200 OK"

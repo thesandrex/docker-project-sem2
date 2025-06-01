@@ -49,3 +49,6 @@ USER appuser
 EXPOSE 80
 
 CMD ["nginx", "-c", "/tmp/nginx.conf", "-g", "daemon off; pid /tmp/nginx/nginx.pid;"]
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -fIs http://localhost | grep -q "200 OK"
