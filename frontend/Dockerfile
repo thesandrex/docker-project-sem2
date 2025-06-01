@@ -22,7 +22,7 @@ RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-RUN addgroup -g 1000 appgroup && adduser -u 1000 -S appuser -G appgroup
+RUN addgroup -g 1006 appgroup && adduser -u 1006 -S appuser -G appgroup
 
 RUN chown -R appuser:appgroup /usr/share/nginx/html
 
