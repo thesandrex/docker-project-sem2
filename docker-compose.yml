@@ -7,6 +7,12 @@ services:
       - "80:80"
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-fIs", "-X", "GET", "http://localhost"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
     volumes:
       - frontend-data:/app/data
     deploy:
@@ -30,6 +36,12 @@ services:
       - app-network
     environment:
       - PORT=8081
+    healthcheck:
+      test: ["CMD", "curl", "-fIs", "-X", "GET", "http://localhost:8081/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
     volumes:
       - backend-data:/app/data
     deploy:
