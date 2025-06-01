@@ -1,0 +1,64 @@
+version: '3.9'
+
+services:
+  frontend:
+    image: crocksgift/docker-frontend-app:latest
+    container_name: frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - app-network
+    volumes:
+      - frontend-data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    read_only: false
+    security_opt:
+      - no-new-privileges:true
+
+  backend:
+    image: crocksgift/docker-backend-app:latest
+    container_name: backend
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    depends_on:
+      - frontend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - app-network
+    environment:
+      - PORT=8081
+    volumes:
+      - backend-data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    read_only: false
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  frontend-data:
+    driver: local
+  backend-data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
