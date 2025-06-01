@@ -1,0 +1,9 @@
+**/.git
+**/*.md
+**/README*
+**/LICENSE
+Dockerfile
+docker-compose*
+.gitignore
+*.test
+*.log
