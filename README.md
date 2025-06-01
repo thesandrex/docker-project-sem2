@@ -74,8 +74,8 @@ Multi-stage подход позволил исключить dev-зависим�
   - `memory: 256M`
 - **security_opt: no-new-privileges** — запрещает повышать привилегии внутри контейнеров
 - **healthcheck**: оба контейнера имеют встроенные механизмы проверки готовности:
-  - frontend: `wget --spider http://localhost`
-  - backend: `curl http://localhost:8081/health`
+  - frontend: `curl -fIs -X GET http://localhost`
+  - backend: `curl -fIs -X GET http://localhost:8081/health`
 
 ---
 
