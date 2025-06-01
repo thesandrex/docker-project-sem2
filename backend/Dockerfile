@@ -29,6 +29,4 @@ RUN chown -R appuser:appgroup /app
 
 USER appuser
 
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s CMD ["/app/app", "healthcheck"]
-
 ENTRYPOINT ["./app"]
