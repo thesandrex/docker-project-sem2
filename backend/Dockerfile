@@ -19,7 +19,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o app ./cmd/main.go
 # ----------------------
 FROM alpine:latest
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN addgroup -g 1005 appgroup && adduser -u 1005 -S appuser -G appgroup
 
 WORKDIR /app
 
