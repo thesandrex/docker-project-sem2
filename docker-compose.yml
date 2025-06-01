@@ -24,6 +24,8 @@ services:
     read_only: false
     security_opt:
       - no-new-privileges:true
+    entrypoint: >
+      sh -c "chown -R 1006:1006 /app/data && exec nginx -g 'daemon off;'"
 
   backend:
     image: crocksgift/docker-backend-app:latest
@@ -53,7 +55,7 @@ services:
     security_opt:
       - no-new-privileges:true
     entrypoint: >
-      sh -c "chown -R 1000:1000 /app/data && exec ./app"
+      sh -c "chown -R 1005:1005 /app/data && exec ./app"
 
 volumes:
   frontend-data:
